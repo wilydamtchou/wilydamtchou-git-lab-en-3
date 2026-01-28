@@ -1,0 +1,35 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Js test
+        run: |
+          echo "Js script is ok"
+    
+  test-java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Compile
+        run: |
+          javac src-java/App.java tests-java/AppTest.java
+      - name: Run tests
+        run: |
+          java -cp src-java:tests-java AppTest
