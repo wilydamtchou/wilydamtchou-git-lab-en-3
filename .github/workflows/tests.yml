@@ -29,7 +29,7 @@ jobs:
           java-version: '17'
       - name: Compile
         run: |
-          javac src-java/App.java test-java/AppTest.java
+          javac src-java/App.java tests-java/AppTest.java
       - name: Run tests
         run: |
-          java -cp src-java:test-java AppTest
+          java -cp src-java:tests-java AppTest
